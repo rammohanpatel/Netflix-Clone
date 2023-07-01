@@ -3,14 +3,9 @@ import './Home.scss'
 import axios from "axios";
 import { useState,useEffect } from 'react';
 import {Link} from "react-router-dom";
-import { BiPlay } from "react-icons/bi"
-import { AiOutlinePlus } from "react-icons/ai"
-
-
-
-//test1
-//test2
-//Jsm3
+import { BiPlay } from "react-icons/bi";
+import { AiOutlinePlus } from "react-icons/ai";
+import Youtube from 'react-youtube';
 
 
 
@@ -22,14 +17,28 @@ const nowPlaying = "now_playing";
 const popular="popular";
 const topRated = "top_rated";
 
+// const fetchMovie = async(id)=>{
+//   const {data}=await axios.get(`${url}/movie/${id}`,{
+//     params:{
+//       api_key:apiKey,
+//       append_to_respond:'videos'
+//     }
+//   })
+//   return data;
+// }
 
+// const selectMovie = async(movie)=>{
+//   const data = await fetchMovie(movie.id);
+//   console.log(data);
+  
+// }
 
 const Cards = ({ img }) => (
   <img className='cards' src={img}></img>
 )
 
 
-const Row = ({ title, arr = [] }) => (
+const Row = ({ title, arr = []  }) => (
 
   <div className="row">
     
@@ -54,13 +63,16 @@ const Home = () => {
   const [nowPlayingMovies,setNowPlayingMovies]= useState([]);
   const [popularMovies,setPopularMovies]= useState([]);
   const [topRatedMovies,setTopRatedMovies]= useState([]);
+ 
 
+  
 
 useEffect(() => {
     const fetchUpcoming=async()=>{
       const {
         data:{results},
-      }=await axios.get(`${url}/movie/${upcoming}?api_key=${apiKey}`);
+      }=await axios.get(`${url}/movie/${upcoming}?api_key=${apiKey}&append_to_response=videos`);
+      console.log('movie data',results);
       setUpcomingMovies(results);
     };
     const fetchNowPlaying = async () => {
@@ -101,6 +113,9 @@ const fetchTopRated = async () => {
      {topRatedMovies[0] && <h1>{topRatedMovies[0].original_title}</h1>}
      {topRatedMovies[0] && <p>{topRatedMovies[0].overview}</p>}
      
+
+     {/* <Youtube  /> */}
+     
      <div>
         <button><BiPlay /> Play  </button>
        <button>My List <AiOutlinePlus /> </button>
@@ -108,16 +123,10 @@ const fetchTopRated = async () => {
      
       </div>
 
-      <Row title={"Upcoming"} arr={upcomigMovies} />
+      <Row title={"Upcoming"} arr={upcomigMovies}  />
       <Row title={"Now Playing"} arr={nowPlayingMovies} />
       <Row title={"Popular"} arr={popularMovies} />
       <Row title={"Top Rated"} arr={topRatedMovies}/> 
-     
-      
-      
-      
-
-
     </section>
   )
 }
