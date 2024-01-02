@@ -2,10 +2,10 @@ import React from 'react'
 import './Home.scss'
 import axios from "axios";
 import { useState,useEffect } from 'react';
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 import { BiPlay } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
-import Youtube from 'react-youtube';
+// import Youtube from 'react-youtube';
 
 
 
@@ -34,7 +34,7 @@ const topRated = "top_rated";
 // }
 
 const Cards = ({ img }) => (
-  <img className='cards' src={img}></img>
+  <img className='cards' src={img} alt=""></img>
 )
 
 
@@ -116,9 +116,9 @@ const fetchTopRated = async () => {
 
      {/* <Youtube  /> */}
      
-     <div>
-        <button><BiPlay /> Play  </button>
-       <button>My List <AiOutlinePlus /> </button>
+     <div className='btn'>
+        <button className='b1'><BiPlay /> Play  </button>
+       <button className='b2'>My List <AiOutlinePlus /> </button>
       </div>
      
       </div>

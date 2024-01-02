@@ -9,7 +9,9 @@ const Header = () => {
   return (
     <nav nav className="header">
     
-    <img src={Logonetflix}></img>
+    <a href="/">
+      <img src={Logonetflix} alt=""></img>
+    </a>
     <div>
       <Link to="/tvshows">TV Shows</Link>
       <Link to="/movies">Movies</Link>
